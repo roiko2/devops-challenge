@@ -21,8 +21,10 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run Tests
         working-directory: ./devops-challenge
-        run: |
-          pytest tests/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: pytest tests/
 
   build-push:
     name: docker-build-push
@@ -48,6 +50,7 @@ jobs:
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ vars.DOCKERHUB_REPO }}:latest
             ${{ vars.DOCKERHUB_REPO }}:v-${{ env.GIT_SHA }}

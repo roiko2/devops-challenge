@@ -11,6 +11,7 @@ def client():
         yield client
 
 def test_health_route(client):
+    print(os.getenv('AWS_SECRET_ACCESS_KEY'))
     response = client.get('/health')
     assert response.status_code == 200
     json_data = response.get_json()
