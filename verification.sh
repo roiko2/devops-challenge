@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run Project
-docker-compose --env-file .env up --build -d
+docker-compose up --build -d
 sleep 5
 
 # Query results

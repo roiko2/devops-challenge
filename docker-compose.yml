@@ -3,5 +3,7 @@ version: '3.8'
 services:
   web:
     build: .
+    env_file:
+      - .env.example
     ports:
       - "5001:5001"
