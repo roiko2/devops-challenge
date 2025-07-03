@@ -1,8 +1,31 @@
-## Issues
-- AWS
-  - Lack of permissions regarding DynamoDB table caused difficulty to understand the scheme and to extract Item value
-- Code
-  - Once running the app locally i got  ` 0.0.0.0:5000: bind: address already in use`
-    - Investigated with `netstat`, found a process which turns out to be my `Mac Control Center`
-    - Either changing the app port or turn off a specific feature of AirPlay receiver solve the issue, decided to change the port to `5001`
-  - Issues with docker context when running the app and/or installing packages, always a bit confusing.
+## 🚨 Issues Encountered
+
+### 🔸 AWS (DynamoDB)
+- **Permission Limitations**
+  - Lack of necessary IAM permissions on the DynamoDB table made it difficult to:
+    - Understand the table schema (key structure).
+    - Extract item values.
+- **Solution**
+  - After experimenting with possible key values, I discovered that the correct value was ``theDoctor`` instead of `thedoctor`.
+
+---
+
+### 🔸 Application Code
+- **Port Conflict on Local Machine**
+  - While running the app locally, I encountered:
+    ```
+    0.0.0.0:5000: bind: address already in use
+    ```
+  - Investigation using `netstat` revealed that a background process related to **Mac Control Center** (AirPlay Receiver) was already using port `5000`.
+  - **Solution:**  
+    - Changed the app port to `5001` to avoid conflicts.
+    - Alternatively, disabling the AirPlay Receiver would also resolve it, but I opted for changing the port to avoid system changes.
+
+---
+
+- **Docker Context & Build Confusion**
+  - Faced some recurring issues with:
+    - Docker build context.
+    - Correct `WORKDIR` usage.
+    - Module import paths inside containers.
+---
