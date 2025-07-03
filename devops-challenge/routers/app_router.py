@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from config import AWS_ACCESS_KEY_ID, AWS_SECRET_KEY_ID
+from config import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 
 app_bp = Blueprint('app', __name__)
 
