@@ -14,7 +14,8 @@ def get_secret_code(secret_code='theDoctor'):
     dynamodb = session.resource('dynamodb')
     table = dynamodb.Table(TABLE_NAME)
     response = table.get_item(Key={'codeName': f'{secret_code}'})
-
-    return jsonify({
-        'secret_code': f'{response.get("Item")["secretCode"]}'
-    })
+    if response:
+        return jsonify({
+            'secret_code': f'{response.get("Item")["secretCode"]}'
+        })
+    return jsonify({'Secret Code not found'})
